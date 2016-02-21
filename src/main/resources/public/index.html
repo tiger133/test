@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+    <title>Hello AngularJS</title>
+    <script src="boewr_components/angular/angular.min.js"></script>
+</head>
+
+<body>
+<h1>User list:</h1>
+
+<div ng-app="myApp" ng-controller="userListController">
+    <ul>
+        <li ng-repeat="user in list">
+            {{ user.id +", "+ user.username}}
+        </li>
+    </ul>
+</div>
+<script>
+    var app = angular.module('myApp',[]);
+    app.controller("userListController",function($scope,$http)
+    {
+        $http.get("/users").then(function(response)
+        {
+            $scope.list = response.data;
+        });
+    });
+</script>
+
+
+<a href="logout.html">logout</a>
+</body>
+</html>
